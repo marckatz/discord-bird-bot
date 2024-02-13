@@ -1,11 +1,13 @@
 from config import app
 
 from flask import request, make_response, jsonify
+
 from dotenv import load_dotenv
+import requests
+import os
 
 load_dotenv()
-
-URL = ""
+WEBHOOK = os.getenv('WEBHOOK')
 
 @app.route('/', methods=['GET','POST'])
 def index():
@@ -20,4 +22,8 @@ def index():
 @app.route('/groupme', methods=['POST'])
 def groupme_message():
     data = request.get_json()
-    return make_response(data, 200)
+    text = data['text']
+    user = data['name']
+    body = {"content": user +': '+ text}
+    response = requests.post(WEBHOOK, json=body)
+    return make_response(body, 200)
