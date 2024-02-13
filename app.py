@@ -2,22 +2,14 @@ from config import app
 
 from flask import request, make_response, jsonify
 
-from dotenv import load_dotenv
 import requests
 import os
 
-load_dotenv()
 WEBHOOK = os.getenv('WEBHOOK')
 
-@app.route('/', methods=['GET','POST'])
+@app.route('/')
 def index():
-    if request.method == 'GET':
-        return 'test'
-    if request.method == 'POST':
-        if request.json["type"] == 1:
-            return jsonify({
-                "type": 1
-            })
+    return 'test'
 
 @app.route('/groupme', methods=['POST'])
 def groupme_message():
