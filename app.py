@@ -1,7 +1,21 @@
-from flask import Flask
+from config import app
 
-app = Flask(__name__)
+from flask import request, make_response, jsonify
+from .env import TOKEN
 
-@app.route("/")
+URL = ""
+
+@app.route('/', methods=['GET','POST'])
 def index():
-    return "test"
+    if request.method == 'GET':
+        return 'test'
+    if request.method == 'POST':
+        if request.json["type"] == 1:
+            return jsonify({
+                "type": 1
+            })
+
+@app.route('/groupme', methods=['POST'])
+def groupme_message():
+    data = request.get_json()
+    return make_response(data, 200)
