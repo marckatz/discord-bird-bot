@@ -17,5 +17,7 @@ def groupme_message():
     text = data['text']
     user = data['name']
     body = {"content": user +': '+ text}
+    if not WEBHOOK:
+        print(WEBHOOK)
     response = requests.post(WEBHOOK, json=body)
     return make_response(body, 200)
