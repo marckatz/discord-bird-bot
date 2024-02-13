@@ -1,7 +1,7 @@
 from config import app
 
 from flask import request, make_response, jsonify
-from .env import TOKEN
+from dotenv import TOKEN
 
 URL = ""
 
